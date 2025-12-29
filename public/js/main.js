@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         genderGame: document.getElementById('gender-game-view'),
         sejourMenu: document.getElementById('sejour-menu'),
         flashcards: document.getElementById('sejour-view'),
-        integrate: document.getElementById('integrate-view')
+        integrate: document.getElementById('integrate-view'),
+        integrateContent: document.getElementById('integrate-content-view')
     };
 
     // Main Menu Navigation
@@ -59,6 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    // Integrate Content Navigation
+    const btnIntegrateTheme1 = document.getElementById('btn-integrate-theme-1');
+    if (btnIntegrateTheme1) {
+        btnIntegrateTheme1.onclick = () => {
+            if (window.startIntegrationFlow) window.startIntegrationFlow('theme-1');
+        };
+    }
+
     // Back Navigation
     document.querySelectorAll('.back-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -75,6 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 navigateTo('mainMenu');
             } else if (views.integrate && !views.integrate.classList.contains('hidden')) {
                 navigateTo('mainMenu');
+            } else if (views.integrateContent && !views.integrateContent.classList.contains('hidden')) {
+                if (window.navigateBackIntegration) window.navigateBackIntegration();
             } else {
                 navigateTo('mainMenu');
             }
