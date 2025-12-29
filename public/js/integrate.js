@@ -58,19 +58,32 @@ function getProgress() {
     return JSON.parse(localStorage.getItem('frintegrate_progress') || '{}');
 }
 
-function markAsRead(url) {
+function toggleReadStatus(url) {
     const progress = getProgress();
-    progress[url] = true;
+    const isNowRead = !progress[url];
+
+    if (isNowRead) {
+        progress[url] = true;
+    } else {
+        delete progress[url];
+    }
     localStorage.setItem('frintegrate_progress', JSON.stringify(progress));
 
     // Update UI if any cards are visible matching this URL
     document.querySelectorAll(`[data-url="${url}"]`).forEach(el => {
-        el.classList.add('completed');
-        // Add badge if missing
-        if (!el.querySelector('.status-badge')) {
-            el.insertAdjacentHTML('beforeend', '<div class="status-badge">✅ Lu</div>');
+        if (isNowRead) {
+            el.classList.add('completed');
+            if (!el.querySelector('.status-badge')) {
+                el.insertAdjacentHTML('beforeend', '<div class="status-badge">✅ Lu</div>');
+            }
+        } else {
+            el.classList.remove('completed');
+            const badge = el.querySelector('.status-badge');
+            if (badge) badge.remove();
         }
     });
+
+    return isNowRead; // Return new status
 }
 
 function isRead(url) {
@@ -220,13 +233,19 @@ function renderFiche(node, container) {
     const btn = document.createElement('button');
     btn.className = `action-btn ${isDone ? 'completed' : ''}`;
     btn.textContent = isDone ? '✅ Terminé' : 'Marquer comme lu';
-    if (isDone) btn.disabled = true;
+    // Remove disabled attribute setting
 
     btn.onclick = (e) => {
-        markAsRead(node.url);
-        btn.textContent = '✅ Terminé';
-        btn.classList.add('completed');
-        btn.disabled = true;
+        const newState = toggleReadStatus(node.url);
+        if (newState) {
+            btn.textContent = '✅ Terminé';
+            btn.classList.add('completed');
+        } else {
+            btn.textContent = 'Marquer comme lu';
+            btn.classList.remove('completed');
+        }
+        // Do NOT disable the button, allowing toggle
+        btn.disabled = false;
     };
 
     actionArea.appendChild(btn);
