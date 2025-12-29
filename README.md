@@ -1,118 +1,106 @@
-# 🇫🇷 GenreSwipe
+# 🇫🇷 Frintegrate
 
-An interactive web game to learn French noun genders through a fun, swipe-based interface. Master the difference between *le* (masculine) and *la* (feminine) with instant feedback!
+**Frintegrate** is your all-in-one companion for learning French and integrating into French society. It combines interactive language learning games with essential civic knowledge tools.
 
-## 🎮 Live Demo
-
-**[Play Now on Render](https://genreswipe.onrender.com)** 
+> **Formerly "GenreSwipe"**: Now expanded with a modular architecture and new integration features.
 
 ## ✨ Features
 
-- 🎯 **1,134+ French Words** - Extensive vocabulary covering everyday nouns
-- 🎲 **Random Selection** - Each game randomly picks 30 words for variety
-- 📱 **Mobile Responsive** - Swipe gestures on mobile, arrow keys on desktop
-- 🎨 **Modern UI** - Beautiful gradient backgrounds with smooth animations
-- 📊 **Progress Tracking** - Real-time progress bar and score tracking
-- 📝 **Review Mode** - Review all your answers after completing the game
-- ⚡ **Fast & Lightweight** - Pure HTML/CSS/JS, no framework overhead
-- 🌐 **Offline Ready** - All words stored locally, no API calls needed
+### 1. 🗣️ Improve your French
 
+- **Genre Swipe Game**: Master the difference between *le* (masculine) and *la* (feminine).
+- **1,134+ Words**: Extensive vocabulary covering everyday nouns.
+- **Mobile Responsive**: Smooth swipe gestures for a native app feel.
+- **Review Mode**: Learn from your mistakes with a dedicated review panel.
 
-## 🎯 How to Play
+### 2. 🪪 Prepare for Séjour
 
-1. Click **Start Game**
-2. A French word appears with its English translation
-3. Swipe or use arrow keys:
-   - **← Left** = Feminine (la)
-   - **→ Right** = Masculine (le)
-4. Get instant feedback (green = correct, red = incorrect)
-5. Complete all 30 words and see your score!
-6. Review your answers to learn from mistakes
+- **Civic Flashcards**: Interactive study tool for residence permit exams.
+- **Targeted Content**:
+  - **CSP**: Questions for *Carte de Séjour Pluriannuelle*.
+  - **CR**: Questions for *Carte de Résident*.
+- **Touch Navigation**: Swipe between cards on mobile.
 
+### 3. 🏰 Learn and Integrate France
 
-## 📁 Project Structure
-
-```
-GenreSwipe/
-├── public/
-│   ├── index.html          # Main game interface
-│   └── words.json          # 1,134+ French words database
-├── utils/
-│   ├── cleanup_words.py    # Remove unsuitable words
-│   ├── count_words.py      # Count total words
-│   ├── create_clean_file.py # Remove duplicates
-│   └── detect_duplicates.py # Find duplicate entries
-├── .github/
-│   └── workflows/
-│       └── deploy.yml      # CI/CD pipeline
-├── server.js               # Express server
-├── package.json            # Dependencies
-├── package-lock.json       # Locked dependencies
-├── .gitignore              # Git ignore rules
-├── .env.example            # Environment variables template
-└── README.md               # This file
-```
-
-## 🎨 Features Breakdown
-
-### Scoring System
-- 🏆 **30/30** - Perfect! You're a gender guru!
-- 🎉 **27-29** - Excellent! Almost perfect!
-- 👍 **23-26** - Great job!
-- 🙂 **18-22** - Not bad! Keep practicing!
-- 🤔 **12-17** - You're getting there!
-- 📚 **0-11** - Keep studying—practice makes perfect!
-
-### UI Highlights
-- Animated gradient background
-- Shimmer effect on card borders
-- Floating emoji decorations
-- Smooth card swipe animations
-- Color-coded feedback (green/red)
-- Responsive design for all devices
-
-## 🔧 Customization
-
-### Adding More Words
-
-Edit `public/words.json`:
-
-```json
-{
-  "word": "maison",
-  "gender": "feminine",
-  "translation": "house"
-}
-```
-
-### Changing Game Length
-
-Modify line 785 in `public/index.html`:
-
-```javascript
-return shuffle(allWords).slice(0, 30);  // Change 30 to desired number
-```
-
-## 🚢 Deployment
-
-This project uses **GitHub Actions** for automatic deployment to Render.
-
-### Setup CI/CD
-
-1. Create a deploy hook on Render
-2. Add it as a GitHub secret: `RENDER_DEPLOY_HOOK`
-3. Push to `main` branch - auto-deploys!
-
-## 📝 License
-
-MIT License - feel free to use this project for learning!
-
-## 👨‍💻 Author
-
-**Abdellahi  El Moustapha** - [LinkedIn](https://www.linkedin.com/in/abmstpha/)
-
-
+- Placeholder for future modules on History, Geography, and Republican Values.
 
 ---
 
-**Happy Learning! 🇫🇷✨**
+## 🎯 How to Use
+
+### Genre Swipe
+
+1. Navigate to **Improve your French** > **Genre Swipe**.
+2. Swipe **Left** for Feminine (*la*), **Right** for Masculine (*le*).
+3. Complete 30 words and check your score!
+
+### Flashcards
+
+1. Navigate to **Prepare for Séjour**.
+2. Select your exam (**CSP** or **CR**).
+3. Read the question, tap the card to **flip** and see the answer.
+4. Swipe **Left** for next card, **Right** for previous (or use arrow keys).
+
+---
+
+## 📁 Project Structure
+
+The project has been refactored into a clean, modular architecture:
+
+```
+Frintegrate/
+├── public/
+│   ├── css/
+│   │   └── styles.css          # Centralized styling
+│   ├── js/
+│   │   ├── main.js             # Navigation & View Config
+│   │   ├── game-gender.js      # 'Genre Swipe' Game Logic
+│   │   └── flashcards.js       # Flashcard Logic
+│   ├── data/
+│   │   ├── questions-csp.json  # CSP Exam Questions
+│   │   ├── questions-cr.json   # CR Exam Questions
+│   │   └── words.json          # French Nouns Database
+│   └── index.html              # Main SPA Entry Point
+├── server.js                   # Node.js Express Server
+├── package.json                # Dependencies
+└── .gitignore                  # Git Configuration
+```
+
+## 🚀 Tech Stack
+
+- **Frontend**: Vanilla HTML5, CSS3 (Animations, Gradients), JavaScript (ES6+).
+- **Backend**: Node.js, Express (serves static assets and JSON API).
+- **Deployment**: Render (Auto-deploy on commit).
+
+## 🚢 Deployment
+
+This project requires **Node.js**.
+
+1. **Install Dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+2. **Start Dev Server**:
+
+   ```bash
+   npm run dev
+   ```
+
+3. **Build/Run**:
+
+   ```bash
+   npm start
+   ```
+
+Deployed automatically to **Render** on every push to `main`.
+
+## 👨‍💻 Author
+
+**Abdellahi El Moustapha** - [LinkedIn](https://www.linkedin.com/in/abmstpha/)
+
+---
+
+**Frintegrate** - *Apprendre, Comprendre, S'intégrer.* 🇫🇷✨
