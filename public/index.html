@@ -1,805 +1,252 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>French Gender Swipe</title>
+  <title>Frintegrate - Learn & Integrate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2, #ff6a00, #ee0979);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      overflow-y: auto;
-    }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .game-container {
-      backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.75);
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-      padding: 30px;
-      text-align: center;
-      min-width: 300px;
-      max-width: 480px;
-      width: 90%;
-      position: relative;
-      max-height: 95vh;
-      overflow-y: auto;
-    }
-    
-    /* Start Screen Enhancements */
-    #start-screen {
-      position: relative;
-    }
-    
-    .game-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 6px;
-      background: linear-gradient(90deg, #ff6b9d, #ffa500, #4facfe, #00f2fe);
-      background-size: 300% 100%;
-      animation: shimmer 3s linear infinite;
-      border-radius: 20px 20px 0 0;
-    }
-    
-    @keyframes shimmer {
-      0% { background-position: 0% 0%; }
-      100% { background-position: 300% 0%; }
-    }
-    
-    .floating-emoji {
-      position: absolute;
-      font-size: 40px;
-      animation: float 6s ease-in-out infinite;
-      opacity: 0.2;
-      pointer-events: none;
-    }
-    
-    .emoji-1 { top: -30px; left: 5%; animation-delay: 0s; }
-    .emoji-2 { top: -20px; right: 8%; animation-delay: 2s; }
-    .emoji-3 { bottom: -30px; left: 10%; animation-delay: 4s; }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(5deg); }
-    }
-    h1 {
-      color: #1a1a1a;
-      margin-bottom: 15px;
-      font-size: clamp(1.2em, 4vw, 2em);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      line-height: 1.2;
-    }
-    h1 a {
-      color: #667eea;
-      text-decoration: none;
-      transition: color 0.2s ease;
-      font-weight: 800;
-    }
-    h1 a:hover {
-      color: #764ba2;
-    }
-    
-    .robot-emoji {
-      font-size: 1.2em;
-      animation: bounce 2s infinite;
-      display: inline-block;
-    }
-    
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    .word-card {
-      background: white;
-      border-radius: 15px;
-      padding: 60px 40px;;
-      margin: 30px 0;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      border: 3px solid transparent;
-      min-height: 180px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transform-origin: center;
-      will-change: transform, opacity;
-    }
-    .word-card.pop-in {
-      animation: popIn 0.5s ease-out;
-    }
-    @keyframes popIn {
-      0% { transform: scale(0.6); opacity: 0; }
-      60% { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .word-card.correct { border-color: #4CAF50; background: #E8F5E8; }
-    .word-card.incorrect { border-color: #f44336; background: #FFEBEE; }
-    .word-card.slide-left { animation: slideLeft 0.6s ease forwards; }
-    .word-card.slide-right { animation: slideRight 0.6s ease forwards; }
-    @keyframes slideLeft { 0% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(-120%) rotate(-10deg); opacity: 0; } }
-    @keyframes slideRight { 0% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(120%) rotate(10deg); opacity: 0; } }
-    .word { 
-      font-family: 'Playfair Display', serif;
-      font-size: 3.2em; 
-      font-weight: 700; 
-      color: #1a1a1a; 
-      text-transform: lowercase; 
-      font-style: italic;
-      letter-spacing: -1px;
-      line-height: 1.2;
-    }
-    .translation { 
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95em; 
-      color: rgba(0, 0, 0, 0.5); 
-      margin-top: 10px; 
-      text-transform: none;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-    }
-    .progress { background: #e0e0e0; border-radius: 10px; height: 6px; margin-bottom: 15px; overflow: hidden; }
-    .progress-bar { background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; transition: width 0.3s ease; }
-    .progress-text { font-size: 0.9em; color: #555; margin-bottom: 20px; }
-    .play-again-btn, .start-btn {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      border: none;
-      padding: 18px 40px;
-      border-radius: 20px;
-      font-size: 1.2em;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 20px;
-      letter-spacing: 0.3px;
-      width: 100%;
-      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .start-btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-    
-    .start-btn:hover::before {
-      width: 400px;
-      height: 400px;
-    }
-    .play-again-btn:hover, .start-btn:hover { 
-      transform: translateY(-3px); 
-      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-    }
-    
-    .start-btn:active {
-      transform: translateY(-1px);
-    }
-    .keyboard-hint, .instructions, .api-info, .error-message { 
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9em;
-      font-weight: 500;
-    }
-    .instructions {
-      background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
-      border-radius: 24px;
-      padding: 25px 20px;
-      margin: 20px 0 15px 0;
-    }
-    
-    .instructions h3 {
-      font-family: 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: 1.5em;
-      margin-bottom: 20px;
-      color: #1a1a1a;
-      letter-spacing: -0.5px;
-    }
-    
-    .instructions p {
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      line-height: 1.7;
-      color: #333;
-      font-size: 1.1em;
-      margin: 15px 0;
-    }
-    
-    .swipe-hints {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin: 25px 0;
-    }
-    
-    .hint-box {
-      background: white;
-      border-radius: 16px;
-      padding: 20px 15px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-    }
-    
-    .hint-box:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-    
-    .hint-box.feminine {
-      border: 3px solid #ff6b9d;
-    }
-    
-    .hint-box.masculine {
-      border: 3px solid #4facfe;
-    }
-    
-    .hint-arrow {
-      font-size: 28px;
-      margin-bottom: 8px;
-      display: block;
-    }
-    
-    .hint-label {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    
-    .hint-box.feminine .hint-label {
-      color: #ff6b9d;
-    }
-    
-    .hint-box.masculine .hint-label {
-      color: #4facfe;
-    }
-    
-    .hint-desc {
-      font-size: 12px;
-      color: #666;
-      font-weight: 600;
-    }
-    
-    .api-info {
-      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-      border-radius: 16px;
-      padding: 15px 20px;
-      text-align: center;
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 0.95em;
-      color: #8b4513;
-      margin: 20px 0;
-    }
-    .stats-container {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 2px solid #e8ecf1;
-    }
-    
-    .stat-item {
-      text-align: center;
-    }
-    
-    .stat-number {
-      font-size: 32px;
-      font-weight: 800;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .stat-label {
-      font-size: 12px;
-      color: #666;
-      font-weight: 600;
-      margin-top: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .error-message { background: #ffebee; border: 1px solid #f44336; color: #c62828; padding: 12px; border-radius: 8px; margin: 20px 0; }
-    
-    /* Score Screen Enhancements */
-    .score-container {
-      text-align: center;
-      padding: 20px 0;
-    }
-    
-    .score-container h2 {
-      font-size: clamp(1.75em, 5vw, 2.25em);
-      color: #1a1a1a;
-      margin-bottom: 25px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-    
-    .final-score {
-      font-size: clamp(1.3em, 4vw, 1.8em);
-      font-weight: 700;
-      margin-bottom: 20px;
-      padding: 25px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #f5f7fa, #e8ecf1);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    }
-    
-    .score-perfect { background: linear-gradient(135deg, #fff9c4, #ffeb3b); color: #f57f17; }
-    .score-excellent { background: linear-gradient(135deg, #e8f5e8, #81c784); color: #2e7d32; }
-    .score-great { background: linear-gradient(135deg, #e1f5fe, #4fc3f7); color: #01579b; }
-    .score-good { background: linear-gradient(135deg, #f3e5f5, #ba68c8); color: #4a148c; }
-    .score-ok { background: linear-gradient(135deg, #fff3e0, #ffb74d); color: #e65100; }
-    .score-needs-work { background: linear-gradient(135deg, #ffebee, #ef5350); color: #b71c1c; }
-    
-    #score-message {
-      font-size: 1.2em;
-      color: #333;
-      margin-bottom: 25px;
-      font-weight: 600;
-    }
-    
-    .keyboard-hint {
-      text-align: center;
-      font-size: 0.9em;
-      color: #666;
-      margin-top: 15px;
-      font-weight: 500;
-    }
-
-    /* --- Overlay + Review Panel Styles --- */
-    #review-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(8px);
-      z-index: 9999;
-    }
-    
-    #review-overlay.show {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    #review-panel {
-      position: relative;
-      width: 90vw;
-      max-width: 500px;
-      max-height: 90vh;
-      min-height: 300px;
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      outline: none;
-    }
-    
-    .review-close-btn {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: rgba(255, 255, 255, 0.9);
-      color: #333;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-      z-index: 10000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .review-close-btn:hover {
-      background: rgba(255, 255, 255, 1);
-      transform: scale(1.1);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    .review-close-btn:active {
-      transform: scale(0.95);
-    }
-    
-    #review-panel h3 {
-      font-family: 'Inter', sans-serif;
-      margin: 10px 0 20px 0;
-      color: #1a1a1a;
-      font-size: 1.5em;
-      font-weight: 800;
-      text-align: center;
-      letter-spacing: -0.3px;
-    }
-    
-    .review-history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-      flex-grow: 1;
-      min-height: 0;
-      padding-right: 5px;
-      padding-bottom: 10px;
-      width: 100%;
-    }
-    
-    .review-history-list::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    .review-history-list::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-    }
-    
-    .review-history-list::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 10px;
-    }
-    
-    .review-history-list::-webkit-scrollbar-thumb:hover {
-      background: rgba(0, 0, 0, 0.5);
-    }
-    
-    .review-card {
-      background: white;
-      border-radius: 16px;
-      padding: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border: 2px solid transparent;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      min-height: 60px;
-      font-size: 1.1em;
-      transition: all 0.2s ease;
-    }
-    
-    .review-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-    }
-    
-    .review-card.correct {
-      border-color: #4CAF50;
-      background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
-      color: #2e7d32;
-    }
-    
-    .review-card.incorrect {
-      border-color: #f44336;
-      background: linear-gradient(135deg, #ffebee, #fff3f3);
-      color: #c62828;
-    }
-    
-    .review-word {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3em;
-      font-weight: 700;
-      font-style: italic;
-      margin-right: 12px;
-      flex: 0 0 35%;
-      text-align: left;
-      color: inherit;
-      letter-spacing: -0.5px;
-    }
-    
-    .review-translation {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95em;
-      color: rgba(0, 0, 0, 0.6);
-      margin-right: 10px;
-      min-width: 60px;
-      text-align: left;
-      flex: 0 0 30%;
-      font-weight: 600;
-    }
-    
-    .review-gender {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95em;
-      font-weight: 700;
-      margin-right: 6px;
-      min-width: 54px;
-      text-align: center;
-      opacity: 0.9;
-      letter-spacing: 0.2px;
-    }
-    
-    .review-correctness {
-      font-size: 1.4em;
-      font-weight: bold;
-      min-width: 30px;
-      text-align: right;
-      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-    }
-    
-    .review-btn {
-      font-family: 'Inter', sans-serif;
-      margin-top: 20px;
-      margin-right: 14px;
-      background: linear-gradient(135deg, #ff6a00, #ee0979);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 22px;
-      font-size: 1em;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      letter-spacing: 0.3px;
-    }
-    
-    .review-btn:hover {
-      background: linear-gradient(135deg, #ff9933, #ff6e93);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    }
-    
-    @media (max-width: 480px) {
-      body {
-        padding: 10px;
-      }
-      
-      .game-container {
-        padding: 20px 15px;
-        min-width: 280px;
-        width: 95%;
-      }
-
-      h1 {
-        font-size: 1.1em;
-        margin-bottom: 10px;
-        line-height: 1.3;
-      }
-      
-      .instructions {
-        padding: 15px 12px;
-        margin: 15px 0 10px 0;
-      }
-      
-      .instructions h3 {
-        font-size: 1.1em;
-        margin-bottom: 10px;
-      }
-      
-      .instructions p {
-        font-size: 0.9em;
-        margin: 8px 0;
-      }
-      
-      .hint-box {
-        padding: 10px 8px;
-      }
-      
-      .hint-arrow {
-        font-size: 22px;
-        margin-bottom: 4px;
-      }
-      
-      .api-info {
-        padding: 10px 12px;
-        font-size: 0.8em;
-        margin: 10px 0;
-      }
-      
-      .stats-container {
-        margin-top: 12px;
-        padding-top: 12px;
-      }
-      
-      .stat-number {
-        font-size: 20px;
-      }
-      
-      .stat-label {
-        font-size: 10px;
-      }
-      
-      .start-btn, .play-again-btn {
-        padding: 12px 24px;
-        font-size: 0.95em;
-        margin-top: 12px;
-      }
-
-      .word {
-        font-size: 2.5em;
-      }
-
-      .word-card {
-        padding: 40px 20px;
-        min-height: 140px;
-        margin: 20px 0;
-      }
-      
-      .floating-emoji {
-        font-size: 30px;
-      }
-      
-      #review-panel {
-        width: 95vw;
-        max-width: 95vw;
-        padding: 15px;
-        max-height: 95vh;
-      }
-      
-      .review-close-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 18px;
-        top: 10px;
-        right: 10px;
-      }
-      
-      #review-panel h3 {
-        font-size: 1.3em;
-        margin: 5px 0 15px 0;
-      }
-      
-      .review-card {
-        padding: 12px 8px;
-        min-height: 55px;
-      }
-      
-      .review-word {
-        font-size: 1.15em;
-        flex: 0 0 40%;
-      }
-      
-      .review-translation {
-        font-size: 0.85em;
-        flex: 0 0 25%;
-        min-width: 40px;
-      }
-      
-      .review-gender {
-        font-size: 0.9em;
-        min-width: 45px;
-      }
-      
-      .review-correctness {
-        font-size: 1.2em;
-        min-width: 25px;
-      }
-      
-      .review-history-list {
-        max-height: calc(95vh - 120px);
-        gap: 8px;
-      }
-    }
-
-  </style>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
   <div class="game-container">
     <div class="floating-emoji emoji-1">🇫🇷</div>
     <div class="floating-emoji emoji-2">📚</div>
     <div class="floating-emoji emoji-3">✨</div>
-    
-    <h1>French Gender Swipe by <a href="https://www.linkedin.com/in/abmstpha/" target="_blank" rel="noopener noreferrer">Abdellahi</a> <span class="robot-emoji">🤖</span></h1>
 
-    <div id="start-screen">
-      <div class="instructions">
-        <h3>How to Play</h3>
-        <p>Guess the gender of 30 French nouns!</p>
-        
+    <!-- ================= MAIN MENU ================= -->
+    <section id="main-menu">
+      <h1>Frintegrate <span class="robot-emoji">🤖</span></h1>
+      <p style="margin-bottom: 30px; color: #666; font-size: 1.1em;">Votre compagnon d'apprentissage et d'intégration
+      </p>
+
+      <div class="menu-grid">
+        <div class="menu-card" id="card-improve">
+          <div style="font-size: 3em; margin-bottom: 15px;">🗣️</div>
+          <h2>Improve your French</h2>
+          <p>Jouez avec les genres des mots</p>
+        </div>
+
+        <div class="menu-card" id="card-sejour">
+          <div style="font-size: 3em; margin-bottom: 15px;">🪪</div>
+          <h2>Prepare for Séjour</h2>
+          <p>Questions pour CSP et Résident</p>
+        </div>
+
+        <div class="menu-card" id="card-integrate">
+          <div style="font-size: 3em; margin-bottom: 15px;">🏰</div>
+          <h2>Learn and Integrate France</h2>
+          <p>Culture, Histoire et Valeurs</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= IMPROVE MENU ================= -->
+    <section id="improve-menu" class="hidden">
+      <div class="navigation-header">
+        <button class="back-btn">←</button>
+        <span class="section-title">Improve your French</span>
+      </div>
+
+      <div class="menu-grid">
+        <div class="menu-card" id="btn-gender-swipe">
+          <div style="font-size: 2.5em; margin-bottom: 10px;">🎭</div>
+          <h2>Genre Swipe</h2>
+          <p>Devinez le genre des mots</p>
+        </div>
+        <!-- Placeholder for future games -->
+        <div class="menu-card" style="opacity: 0.5; cursor: default;">
+          <div style="font-size: 2.5em; margin-bottom: 10px;">➕</div>
+          <h2>Coming Soon</h2>
+          <p>Plus de jeux bientôt</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GENDER GAME VIEW ================= -->
+    <section id="gender-game-view" class="hidden">
+      <div class="navigation-header">
+        <button class="back-btn">←</button>
+        <span class="section-title">Gender Swipe</span>
+      </div>
+
+      <div id="gender-start-screen">
+        <div class="instructions">
+          <h3>How to Play</h3>
+          <p>Guess the gender of 30 French nouns!</p>
+
+          <div class="swipe-hints">
+            <div class="hint-box feminine">
+              <span class="hint-arrow">←</span>
+              <div class="hint-label">Left</div>
+              <div class="hint-desc">Feminine (la)</div>
+            </div>
+            <div class="hint-box masculine">
+              <span class="hint-arrow">→</span>
+              <div class="hint-label">Right</div>
+              <div class="hint-desc">Masculine (le)</div>
+            </div>
+          </div>
+
+          <p>Use arrow keys or swipe gestures</p>
+        </div>
+
+        <div class="api-info">
+          📦 Vocabulary randomly generated by AI 📦
+        </div>
+
+        <button class="start-btn" onclick="startGenderGame()">Start Game</button>
+
+        <div class="stats-container">
+          <div class="stat-item">
+            <div class="stat-number">30</div>
+            <div class="stat-label">Words</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Genders</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Learning</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="gender-loading-screen" style="display: none;">
+        <div class="loading">
+          <!-- You might want to add spinner style in css if missing, usually generic spinner class existed -->
+          <p style="margin-top:20px; font-weight:600;">Chargement des mots...</p>
+        </div>
+      </div>
+
+      <div id="gender-game-screen" style="display: none;">
+        <div class="progress">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="progress-text" id="progress-text">Word 1 of 30</div>
+        <div class="word-card" id="word-card">
+          <div class="word" id="current-word">Loading...</div>
+          <div class="translation" id="current-translation"></div>
+        </div>
         <div class="swipe-hints">
           <div class="hint-box feminine">
-            <span class="hint-arrow">←</span>
-            <div class="hint-label">Left</div>
-            <div class="hint-desc">Feminine (la)</div>
+            <span class="hint-label">← Feminine</span>
           </div>
           <div class="hint-box masculine">
-            <span class="hint-arrow">→</span>
-            <div class="hint-label">Right</div>
-            <div class="hint-desc">Masculine (le)</div>
+            <span class="hint-label">Masculine →</span>
           </div>
         </div>
-        
-        <p>Use arrow keys or swipe gestures</p>
+        <div class="keyboard-hint">Use ← → arrow keys or swipe left/right</div>
       </div>
-      
-      <div class="api-info">
-        📦 Vocabulary randomly generated by AI 📦
-      </div>
-      
-      <button class="start-btn" onclick="startGame()">Start Game</button>
-      
-      <div class="stats-container">
-        <div class="stat-item">
-          <div class="stat-number">30</div>
-          <div class="stat-label">Words</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">2</div>
-          <div class="stat-label">Genders</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">∞</div>
-          <div class="stat-label">Learning</div>
-        </div>
-      </div>
-    </div>
 
-    <div id="loading-screen" style="display: none;">
-      <div class="loading">
-        <div class="spinner"></div>
-        <p>Loading random words for you...</p>
-      </div>
-    </div>
-
-    <div id="game-screen" style="display: none;">
-      <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
-      <div class="progress-text" id="progress-text">Word 1 of 30</div>
-      <div class="word-card" id="word-card">
-        <div class="word" id="current-word">Loading...</div>
-        <div class="translation" id="current-translation"></div>
-      </div>
-      <div class="swipe-hints">
-        <div class="hint-box feminine">
-          <span class="hint-label">← Feminine</span>
-        </div>
-        <div class="hint-box masculine">
-          <span class="hint-label">Masculine →</span>
+      <div id="gender-score-screen" style="display: none;">
+        <div class="score-container">
+          <h2>🎉 Game Complete!</h2>
+          <div class="final-score" id="final-score">You got 0 out of 30 correct</div>
+          <div id="score-message"></div>
+          <button class="review-btn" id="review-btn" style="display:none;">📝 Review My Cards</button>
+          <button class="play-again-btn" onclick="startGenderGame()">🔄 Play Again</button>
         </div>
       </div>
-      <div class="keyboard-hint">Use ← → arrow keys or swipe left/right</div>
-    </div>
 
-    <div id="score-screen" style="display: none;">
-      <div class="score-container">
-        <h2>🎉 Game Complete!</h2>
-        <div class="final-score" id="final-score">You got 0 out of 30 correct</div>
-        <div id="score-message"></div>
-        <button class="review-btn" id="review-btn" style="display:none;">📝 Review My Cards</button>
-        <button class="play-again-btn" onclick="startGame()">🔄 Play Again</button>
+      <div id="gender-error-screen" style="display: none;">
+        <div class="error-message" id="error-message">❌ Failed to load words.</div>
+        <button class="play-again-btn" onclick="startGenderGame()">Try Again</button>
       </div>
-    </div>
+    </section>
 
-    <!-- REVIEW OVERLAY + PANEL -->
+    <!-- ================= SEJOUR MENU ================= -->
+    <section id="sejour-menu" class="hidden">
+      <div class="navigation-header">
+        <button class="back-btn">←</button>
+        <span class="section-title">Prepare for Séjour</span>
+      </div>
+
+      <div class="menu-grid">
+        <div class="menu-card" id="btn-csp">
+          <div style="font-size: 2.5em; margin-bottom: 10px;">📅</div>
+          <h2>Questions de connaissance - CSP</h2>
+          <p>Carte de Séjour Pluriannuelle</p>
+        </div>
+        <div class="menu-card" id="btn-cr">
+          <div style="font-size: 2.5em; margin-bottom: 10px;">🏠</div>
+          <h2>Questions de connaissance - CR</h2>
+          <p>Carte de Résident</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FLASHCARDS VIEW ================= -->
+    <section id="sejour-view" class="hidden">
+      <div class="navigation-header">
+        <button class="back-btn">←</button>
+        <span class="section-title">Flashcards</span>
+        <span id="flashcard-counter" style="margin-left: auto; font-size: 0.9em; color: #666; font-weight: 600;"></span>
+      </div>
+
+      <div class="flashcard-container" onclick="flipCard()">
+        <div class="flashcard" id="flashcard-card">
+          <div class="flashcard-front">
+            <div class="flashcard-category" id="flashcard-category">Catégorie</div>
+            <div class="flashcard-question" id="flashcard-question">Chargement...</div>
+            <div class="flashcard-hint">(Cliquer pour retourner)</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="flashcard-answer" id="flashcard-answer">Réponse</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flashcard-controls">
+        <button class="control-btn" onclick="prevCard(event)">Précédent</button>
+        <button class="control-btn next" onclick="nextCard(event)">Suivant</button>
+      </div>
+
+      <div class="keyboard-hint">Espace pour retourner • Flèches pour naviguer</div>
+    </section>
+
+    <!-- ================= INTEGRATE VIEW ================= -->
+    <section id="integrate-view" class="hidden">
+      <div class="navigation-header">
+        <button class="back-btn">←</button>
+        <span class="section-title">Learn and Integrate France</span>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div style="font-size: 2em; margin-bottom: 10px;">⚖️</div>
+          <p>Principes et valeurs de la République</p>
+          <span style="font-size:0.8em; color:#999; margin-top:5px;">(Bientôt)</span>
+        </div>
+        <div class="menu-card">
+          <div style="font-size: 2em; margin-bottom: 10px;">🏛️</div>
+          <p>Système institutionnel et politique</p>
+          <span style="font-size:0.8em; color:#999; margin-top:5px;">(Bientôt)</span>
+        </div>
+        <div class="menu-card">
+          <div style="font-size: 2em; margin-bottom: 10px;">📜</div>
+          <p>Droits et devoirs</p>
+          <span style="font-size:0.8em; color:#999; margin-top:5px;">(Bientôt)</span>
+        </div>
+        <div class="menu-card">
+          <div style="font-size: 2em; margin-bottom: 10px;">🌍</div>
+          <p>Histoire, géographie et culture</p>
+          <span style="font-size:0.8em; color:#999; margin-top:5px;">(Bientôt)</span>
+        </div>
+        <div class="menu-card">
+          <div style="font-size: 2em; margin-bottom: 10px;">🤝</div>
+          <p>Vivre dans la société française</p>
+          <span style="font-size:0.8em; color:#999; margin-top:5px;">(Bientôt)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODALS & OVERLAYS -->
     <div id="review-overlay">
       <div id="review-panel" tabindex="0">
         <button class="review-close-btn" onclick="closeReviewPanel()">×</button>
@@ -808,236 +255,11 @@
       </div>
     </div>
 
-    <div id="error-screen" style="display: none;">
-      <div class="error-message" id="error-message">❌ Failed to load words.</div>
-      <button class="play-again-btn" onclick="startGame()">Try Again</button>
-    </div>
   </div>
 
-  <script>
-    let currentWords = [], currentWordIndex = 0, score = 0, gameActive = false;
-    let history = [];
-    let cachedWords = null; // Cache words globally
-    const startScreen = document.getElementById('start-screen');
-    const loadingScreen = document.getElementById('loading-screen');
-    const gameScreen = document.getElementById('game-screen');
-    const scoreScreen = document.getElementById('score-screen');
-    const errorScreen = document.getElementById('error-screen');
-    const currentWordEl = document.getElementById('current-word');
-    const currentTransEl = document.getElementById('current-translation');
-    const progressBar = document.getElementById('progress-bar');
-    const progressText = document.getElementById('progress-text');
-    const wordCard = document.getElementById('word-card');
-    const finalScore = document.getElementById('final-score');
-    const scoreMessage = document.getElementById('score-message');
-    const errorMessage = document.getElementById('error-message');
-    const reviewBtn = document.getElementById('review-btn');
-    const reviewOverlay = document.getElementById('review-overlay');
-    const reviewPanel = document.getElementById('review-panel');
-    const reviewHistoryList = document.getElementById('review-history-list');
-
-    // Load words once on page load
-    async function loadWordsOnce() {
-      if (cachedWords) return cachedWords;
-      const res = await fetch('/words.json');
-      if (!res.ok) throw new Error('Unable to fetch local words.json');
-      cachedWords = await res.json();
-      return cachedWords;
-    }
-
-    async function loadLocalWords() {
-      const allWords = await loadWordsOnce();
-      return shuffle([...allWords]).slice(0, 30);
-    }
-
-    function shuffle(arr) {
-      return arr.sort(() => Math.random() - 0.5);
-    }
-
-    async function startGame() {
-      currentWords = []; currentWordIndex = 0; score = 0; gameActive = false;
-      history = [];
-      hideAllScreens();
-      try {
-        currentWords = await loadLocalWords();
-      } catch (e) {
-        return showError(e.message);
-      }
-      gameActive = true; hideAllScreens(); gameScreen.style.display = 'block';
-      displayCurrentWord();
-    }
-
-    function displayCurrentWord() {
-      if (currentWordIndex >= currentWords.length) return endGame();
-      const w = currentWords[currentWordIndex];
-      currentWordEl.textContent = w.word;
-      currentTransEl.textContent = w.translation;
-      const prog = ((currentWordIndex + 1) / currentWords.length) * 100;
-      progressBar.style.width = prog + '%';
-      progressText.textContent = `Word ${currentWordIndex + 1} of ${currentWords.length}`;
-      wordCard.className = 'word-card';
-    }
-
-    function makeGuess(guess, swipeDirection = null) {
-      if (!gameActive) return;
-      gameActive = false;
-
-      const w = currentWords[currentWordIndex];
-      const isCorrect = guess === w.gender;
-
-      // PUSH HISTORY
-      history.push({
-        word: w.word,
-        translation: w.translation,
-        gender: w.gender,
-        wasCorrect: isCorrect,
-        guess: guess
-      });
-
-      const swipeClass = swipeDirection === 'left'
-        ? 'slide-left'
-        : swipeDirection === 'right'
-          ? 'slide-right'
-          : guess === 'feminine'
-            ? 'slide-left'
-            : 'slide-right';
-
-      if (isCorrect) {
-        score++;
-        wordCard.classList.add('correct', swipeClass);
-      } else {
-        wordCard.classList.add('incorrect', swipeClass);
-      }
-
-      setTimeout(() => {
-        wordCard.className = 'word-card';
-        currentWordIndex++;
-
-        if (currentWordIndex < currentWords.length) {
-          displayCurrentWord();
-          gameActive = true;
-        } else {
-          endGame();
-        }
-      }, 600);
-    }
-
-    function endGame() {
-      gameActive = false;
-      hideAllScreens();
-      scoreScreen.style.display = 'block';
-
-      finalScore.textContent = `You got ${score} out of 30 correct`;
-
-      let cls = '', msg = '';
-
-      if (score === 30) {
-        cls = 'score-perfect';
-        msg = '🏆 Perfect score! You’re a gender guru!';
-      } else if (score >= 27) {
-        cls = 'score-excellent';
-        msg = '🎉 Excellent! Almost perfect!';
-      } else if (score >= 23) {
-        cls = 'score-great';
-        msg = '👍 Great job!';
-      } else if (score >= 18) {
-        cls = 'score-good';
-        msg = '🙂 Not bad! Keep practicing!';
-      } else if (score >= 12) {
-        cls = 'score-ok';
-        msg = '🤔 You’re getting there!,  Keep studying';
-      } else {
-        cls = 'score-needs-work';
-        msg = '📚 Keep studying—practice makes perfect!';
-      }
-
-      finalScore.className = `final-score ${cls}`;
-      scoreMessage.textContent = msg;
-
-      // Show review button if there is history
-      if (history.length > 0) {
-        reviewBtn.style.display = 'inline-block';
-      } else {
-        reviewBtn.style.display = 'none';
-      }
-    }
-
-    reviewBtn.onclick = function () {
-      showReviewPanel();
-    };
-
-   function showReviewPanel() {
-      // Clear previous
-      reviewHistoryList.innerHTML = '';
-      history.forEach((item, idx) => {
-        const div = document.createElement('div');
-        div.className = 'review-card ' + (item.wasCorrect ? 'correct' : 'incorrect');
-        div.innerHTML = `
-          <span class="review-word">${item.word}</span>
-          <span class="review-translation">${item.translation || ''}</span>
-          <span class="review-gender">${item.gender === 'feminine' ? 'la (f)' : 'le (m)'}</span>
-          <span class="review-correctness">${item.wasCorrect ? '✔' : '✖'}</span>
-        `;
-        reviewHistoryList.appendChild(div);
-      });
-      
-      // Show overlay immediately
-      reviewOverlay.classList.add('show');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeReviewPanel() {
-      reviewOverlay.classList.remove('show');
-      document.body.style.overflow = '';
-    }
-
-    // Click outside to close (but not when clicking inside the panel)
-    reviewOverlay.addEventListener('click', function(e) {
-      if (e.target === reviewOverlay) {
-        closeReviewPanel();
-      }
-    });
-
-    // ESC key to close
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && reviewOverlay.style.display === 'flex') {
-        closeReviewPanel();
-      }
-    });
-
-    // Game controls
-    document.addEventListener('keydown', e => {
-      if (!gameActive) return;
-      if (e.key==='ArrowLeft') makeGuess('feminine','left');
-      if (e.key==='ArrowRight') makeGuess('masculine','right');
-    });
-    
-    function hideAllScreens() {
-      [startScreen, loadingScreen, gameScreen, scoreScreen, errorScreen].forEach(el => el.style.display='none');
-      closeReviewPanel();
-    }
-
-        function showError(msg) { 
-      hideAllScreens(); 
-      errorMessage.textContent=msg; 
-      errorScreen.style.display='block'; 
-    }
-
-    let touchStartX=0, mouseStartX=0, isDown=false;
-    wordCard.addEventListener('touchstart', e=> touchStartX=e.changedTouches[0].screenX);
-    wordCard.addEventListener('touchend', e=> {
-      const dx=e.changedTouches[0].screenX-touchStartX;
-      if (Math.abs(dx)>50) makeGuess(dx>0?'masculine':'feminine', dx>0?'right':'left');
-    });
-    wordCard.addEventListener('mousedown', e=> { mouseStartX=e.clientX; isDown=true; });
-    wordCard.addEventListener('mouseup', e=> {
-      if (!isDown) return;
-      const dx=e.clientX-mouseStartX;
-      if (Math.abs(dx)>50) makeGuess(dx>0?'masculine':'feminine', dx>0?'right':'left');
-      isDown=false;
-    });
-    wordCard.addEventListener('mouseleave', ()=> isDown=false);
-    wordCard.addEventListener('selectstart', e=> e.preventDefault());
-  </script>
+  <script src="js/game-gender.js"></script>
+  <script src="js/flashcards.js"></script>
+  <script src="js/main.js"></script>
 </body>
+
 </html>
