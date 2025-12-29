@@ -1071,247 +1071,378 @@ h1 a:hover {
 .hidden {
   display: none !important;
 }
+
 /* Content Integration Styles */
 .menu-card .status-badge {
-    margin-top: 10px;
-    font-size: 0.8rem;
-    color: #4CAF50;
-    font-weight: 600;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #4CAF50;
+  font-weight: 600;
 }
 
 .menu-card.completed {
-    border: 2px solid #4CAF50;
-    background: #f8fff9;
+  border: 2px solid #4CAF50;
+  background: #f8fff9;
 }
 
 .fiche-wrapper {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 .objectives-card {
-    background: linear-gradient(135deg, #f0f4ff, #e1e8ff);
-    border-left: 5px solid #667eea;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 30px;
-    display: flex;
-    align-items: flex-start;
-    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.1);
+  background: linear-gradient(135deg, #f0f4ff, #e1e8ff);
+  border-left: 5px solid #667eea;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: flex-start;
+  box-shadow: 0 4px 6px rgba(102, 126, 234, 0.1);
 }
 
 .obj-icon {
-    font-size: 2em;
-    margin-right: 20px;
-    padding-top: 5px;
+  font-size: 2em;
+  margin-right: 20px;
+  padding-top: 5px;
 }
 
 .obj-content h4 {
-    color: #4a5568;
-    text-transform: uppercase;
-    font-size: 0.9em;
-    letter-spacing: 1px;
+  color: #4a5568;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 1px;
 }
 
 .obj-content ul li {
-    margin-bottom: 8px;
-    color: #2d3748;
+  margin-bottom: 8px;
+  color: #2d3748;
 }
 
 .fiche-h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8em;
-    font-weight: 700;
-    color: #1a1a1a;
-    border-bottom: 3px solid #667eea;
-    padding-bottom: 15px;
-    margin-top: 50px;
-    margin-bottom: 25px;
-    width: fit-content;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #1a1a1a;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 15px;
+  margin-top: 50px;
+  margin-bottom: 25px;
+  width: fit-content;
 }
 
 .fiche-h3 {
-    font-size: 1.3em;
-    font-weight: 600;
-    color: #553c9a;
-    margin-top: 30px;
-    margin-bottom: 15px;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #553c9a;
+  margin-top: 30px;
+  margin-bottom: 15px;
 }
 
 .fiche-p {
-    font-size: 1.1em;
-    line-height: 1.8;
-    color: #444;
-    margin-bottom: 20px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 20px;
 }
 
 .fiche-ul {
-    list-style-type: none; /* remove default bullets */
-    padding-left: 10px;
-    margin-bottom: 20px;
+  list-style-type: none;
+  /* remove default bullets */
+  padding-left: 10px;
+  margin-bottom: 20px;
 }
 
 .fiche-ul li {
-    padding-left: 20px;
-    position: relative;
-    margin-bottom: 12px;
-    line-height: 1.6;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 12px;
+  line-height: 1.6;
 }
 
 .fiche-ul li::before {
-    content: "•";
-    color: #667eea;
-    font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
+  content: "•";
+  color: #667eea;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }
 
 .action-btn {
-    padding: 15px 40px;
-    font-size: 1.1em;
-    font-weight: bold;
-    color: white;
-    background: #667eea;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  padding: 15px 40px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: white;
+  background: #667eea;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 .action-btn:hover:not(:disabled) {
-    background: #5a67d8;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+  background: #5a67d8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
 }
 
 .action-btn.completed {
-    background: #4CAF50;
-    cursor: default;
-    box-shadow: none;
-    transform: none;
+  background: #4CAF50;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
 }
 
 .action-btn:disabled {
-    opacity: 0.8;
-    cursor: not-allowed;
+  opacity: 0.8;
+  cursor: not-allowed;
 }
 
 /* Animations */
 .animate-fade-in {
-    animation: fadeIn 0.4s ease-out;
+  animation: fadeIn 0.4s ease-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ================================================================= */
-/* RESPONSIVE DESIGN BREAKPOINTS                                     */
+/* MODERN RESPONSIVE DESIGN - Mobile First with Fluid Layouts        */
+/* Based on 2024 best practices: clamp(), auto-fit, minmax(), rem    */
 /* ================================================================= */
 
-/* MOBILE DEVICES (Up to 767px) */
-@media screen and (max-width: 767px) {
-  /* Layout reset for vertical flow */
-  body {
-    padding: 10px;
-    font-size: 14px; /* Slightly smaller base size */
+/* --- Core Responsive Variables --- */
+:root {
+  /* Fluid typography using clamp(min, preferred, max) */
+  --font-size-base: clamp(0.875rem, 2vw + 0.5rem, 1rem);
+  --font-size-lg: clamp(1.125rem, 2.5vw + 0.5rem, 1.5rem);
+  --font-size-xl: clamp(1.5rem, 3vw + 0.5rem, 2.25rem);
+  --font-size-2xl: clamp(1.75rem, 4vw + 0.5rem, 3rem);
+
+  /* Fluid spacing */
+  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm: clamp(0.75rem, 2vw, 1rem);
+  --space-md: clamp(1rem, 3vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 4vw, 2.5rem);
+  --space-xl: clamp(2rem, 5vw, 4rem);
+
+  /* Container widths */
+  --container-max: min(90vw, 1200px);
+  --content-max: min(95vw, 800px);
+}
+
+/* --- Base Mobile-First Styles --- */
+body {
+  font-size: var(--font-size-base);
+  padding: var(--space-sm);
+  line-height: 1.6;
+}
+
+/* Fluid container */
+.game-container {
+  width: 100%;
+  max-width: var(--container-max);
+  padding: var(--space-md);
+  margin: 0 auto;
+}
+
+/* --- Fluid Grid System --- */
+.menu-grid {
+  display: grid;
+  /* Auto-fit with minmax creates fluid responsive columns */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-md);
+  width: 100%;
+}
+
+/* Cards with fluid sizing */
+.menu-card {
+  padding: var(--space-md);
+  min-height: clamp(120px, 20vh, 200px);
+  /* Touch target minimum 44px */
+  min-width: 44px;
+}
+
+.menu-card h2,
+.menu-card h3 {
+  font-size: var(--font-size-lg);
+}
+
+.menu-card p {
+  font-size: var(--font-size-base);
+}
+
+/* --- Fiche Content Fluid Styles --- */
+.fiche-wrapper,
+.fiche-content {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-md);
+}
+
+.fiche-h2 {
+  font-size: var(--font-size-xl);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.fiche-h3 {
+  font-size: var(--font-size-lg);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.fiche-p {
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  margin-bottom: var(--space-sm);
+}
+
+.fiche-ul {
+  padding-left: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.fiche-ul li {
+  margin-bottom: var(--space-xs);
+  line-height: 1.6;
+}
+
+/* --- Objectives Card Fluid --- */
+.objectives-card {
+  padding: var(--space-md);
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.obj-icon {
+  font-size: var(--font-size-xl);
+  flex-shrink: 0;
+}
+
+/* --- Buttons with proper touch targets --- */
+.action-btn {
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--font-size-base);
+  min-height: 44px;
+  /* Touch target */
+  min-width: 44px;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* --- Navigation Header --- */
+.navigation-header {
+  margin-bottom: var(--space-md);
+  gap: var(--space-sm);
+}
+
+.back-btn {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: var(--font-size-lg);
+}
+
+.section-title {
+  font-size: var(--font-size-lg);
+}
+
+/* --- Flashcard Fluid Sizing --- */
+.flashcard-container {
+  width: 100%;
+  max-width: min(90vw, 450px);
+  height: clamp(280px, 50vh, 400px);
+  margin: var(--space-md) auto;
+}
+
+.flashcard-question {
+  font-size: var(--font-size-lg);
+}
+
+.flashcard-answer {
+  font-size: var(--font-size-base);
+}
+
+.flashcard-controls {
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.control-btn {
+  padding: var(--space-sm);
+  min-height: 44px;
+  flex: 1 1 auto;
+  min-width: 120px;
+}
+
+/* ================================================================= */
+/* Progressive Enhancement: Larger Screens (Tablet+)                 */
+/* ================================================================= */
+@media screen and (min-width: 768px) {
+  .game-container {
+    padding: var(--space-lg);
   }
 
-  h1 { font-size: 2em; }
-  h2 { font-size: 1.5em; }
-
-  /* Force single column grids */
-  .menu-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  /* Adjust spacing in cards */
-  .menu-card {
-    padding: 20px;
-    min-height: 120px;
-  }
-
-  .menu-card .icon {
-    font-size: 2.5em; /* Scale down icons slightly */
-  }
-
-  /* Fiche Content */
-  .fiche-content {
-    padding: 15px;
-    margin: 0;
-    width: 100%;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .fiche-h2 {
-    font-size: 1.4em;
-    margin-top: 30px;
-    margin-bottom: 20px;
-  }
-
-  .fiche-p, .fiche-ul li {
-    font-size: 1.05em;
-    line-height: 1.6;
-  }
-
-  .objectives-card {
-    flex-direction: column;
-    padding: 15px;
-  }
-  
-  .obj-icon {
-    margin-bottom: 10px;
-  }
-
-  /* Buttons */
   .action-btn {
-    width: 100%;
-    padding: 15px 0;
-  }
-  
-  /* Navigation Header adjustments */
-  .navigation-header {
-    margin-bottom: 15px;
+    width: auto;
+    max-width: none;
   }
 
-  .section-title {
-    font-size: 1em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-/* TABLETS (768px to 1023px) */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  .menu-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .fiche-content {
-    padding: 30px;
-  }
-}
-
-/* DESKTOPS / LAPTOPS (1024px and up) */
-@media screen and (min-width: 1024px) {
-  /* More breathing room */
-  .menu-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 columns for main menu */
-    gap: 30px;
-  }
-
-  .fiche-content {
-    padding: 50px;
-    max-width: 900px; /* Limit line length for readability */
-  }
-
-  /* Horizontal layout tweaks if needed */
   .objectives-card {
-    padding: 30px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+/* ================================================================= */
+/* Progressive Enhancement: Desktop/Laptop                           */
+/* ================================================================= */
+@media screen and (min-width: 1024px) {
+  body {
+    padding: var(--space-lg);
+  }
+
+  .game-container {
+    padding: var(--space-xl);
+  }
+
+  /* Allow more columns on wide screens */
+  .menu-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: var(--space-lg);
+  }
+
+  .fiche-wrapper,
+  .fiche-content {
+    padding: var(--space-xl);
+  }
+
+  .flashcard-container {
+    height: 400px;
+  }
+}
+
+/* ================================================================= */
+/* Accessibility: Reduced Motion                                      */
+/* ================================================================= */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
