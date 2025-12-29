@@ -119,6 +119,36 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Touch Swipe Logic for Flashcards
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const flashcardContainer = document.querySelector('.flashcard-container');
+    if (flashcardContainer) {
+        flashcardContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        flashcardContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+    }
+});
+
+function handleSwipe() {
+    const swipeThreshold = 50; // Minimum distance for a swipe
+    if (touchEndX < touchStartX - swipeThreshold) {
+        // Swiped Left -> Next Card
+        nextCard();
+    }
+    if (touchEndX > touchStartX + swipeThreshold) {
+        // Swiped Right -> Previous Card
+        prevCard();
+    }
+}
+
 // Exports
 window.startFlashcards = startFlashcards;
 window.flipCard = flipCard;
