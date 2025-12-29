@@ -2,7 +2,9 @@
 
 **Frintegrate** is your all-in-one companion for learning French and integrating into French society. It combines interactive language learning games with essential civic knowledge tools.
 
-> **Formerly "GenreSwipe"**: Now expanded with a modular architecture and new integration features.
+## 🎮 Live Demo
+
+**[Play Now on Frintegrate](https://frintegrate.onrender.com)**
 
 ## ✨ Features
 
