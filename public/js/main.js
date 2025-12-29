@@ -62,11 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Integrate Content Navigation
     const btnIntegrateTheme1 = document.getElementById('btn-integrate-theme-1');
-    if (btnIntegrateTheme1) {
-        btnIntegrateTheme1.onclick = () => {
-            if (window.startIntegrationFlow) window.startIntegrationFlow('theme-1');
-        };
-    }
+    if (btnIntegrateTheme1) btnIntegrateTheme1.onclick = () => window.startIntegrationFlow && window.startIntegrationFlow('theme-1');
+
+    const btnIntegrateTheme2 = document.getElementById('btn-integrate-theme-2');
+    if (btnIntegrateTheme2) btnIntegrateTheme2.onclick = () => window.startIntegrationFlow && window.startIntegrationFlow('theme-2');
+
+    const btnIntegrateTheme3 = document.getElementById('btn-integrate-theme-3');
+    if (btnIntegrateTheme3) btnIntegrateTheme3.onclick = () => window.startIntegrationFlow && window.startIntegrationFlow('theme-3');
+
+    const btnIntegrateTheme4 = document.getElementById('btn-integrate-theme-4');
+    if (btnIntegrateTheme4) btnIntegrateTheme4.onclick = () => window.startIntegrationFlow && window.startIntegrationFlow('theme-4');
+
+    const btnIntegrateTheme5 = document.getElementById('btn-integrate-theme-5');
+    if (btnIntegrateTheme5) btnIntegrateTheme5.onclick = () => window.startIntegrationFlow && window.startIntegrationFlow('theme-5');
 
     // Back Navigation
     document.querySelectorAll('.back-btn').forEach(btn => {

@@ -1,14 +1,16 @@
 
 let integrationData = null;
+let currentThemeId = null;
 let navigationStack = [];
 
-async function loadIntegrationData() {
-    if (integrationData) return integrationData;
+async function loadIntegrationData(themeId) {
+    if (integrationData && currentThemeId === themeId) return integrationData;
     try {
-        // For now, we only have theme 1. In future, we could have an index or merge them.
-        const res = await fetch('/data/integration_theme_1.json');
+        const filename = `integration_${themeId.replace('-', '_')}.json`;
+        const res = await fetch(`/data/${filename}`);
         if (!res.ok) throw new Error("Failed to load content");
         integrationData = await res.json();
+        currentThemeId = themeId;
         return integrationData;
     } catch (e) {
         console.error(e);
@@ -18,13 +20,7 @@ async function loadIntegrationData() {
 }
 
 function startIntegrationFlow(themeId) {
-    // Currently only supporting theme 1
-    if (themeId !== 'theme-1') {
-        alert("Ce thème n'est pas encore disponible.");
-        return;
-    }
-
-    loadIntegrationData().then(data => {
+    loadIntegrationData(themeId).then(data => {
         if (!data) return;
 
         navigationStack = []; // Reset stack
@@ -85,11 +81,17 @@ function renderCategory(node, container) {
 
             // Icon based on title keywords (simple heuristic)
             let icon = '📄';
-            if (child.title.toLowerCase().includes('liberté')) icon = '🕊️';
-            if (child.title.toLowerCase().includes('égalité')) icon = '⚖️';
-            if (child.title.toLowerCase().includes('fraternité')) icon = '🤝';
-            if (child.title.toLowerCase().includes('laïcité')) icon = '🏛️';
-            if (child.title.toLowerCase().includes('symbole')) icon = '🇫🇷';
+            const lowerTitle = child.title.toLowerCase();
+            if (lowerTitle.includes('liberté')) icon = '🕊️';
+            else if (lowerTitle.includes('égalité')) icon = '⚖️';
+            else if (lowerTitle.includes('fraternité')) icon = '🤝';
+            else if (lowerTitle.includes('laïcité')) icon = '🏛️';
+            else if (lowerTitle.includes('symbole')) icon = '🇫🇷';
+            else if (lowerTitle.includes('histoire')) icon = '📚';
+            else if (lowerTitle.includes('guerre')) icon = '⚔️';
+            else if (lowerTitle.includes('culture')) icon = '🎨';
+            else if (lowerTitle.includes('vote')) icon = '🗳️';
+            else if (lowerTitle.includes('droit')) icon = '📜';
 
             card.innerHTML = `
                 <div style="font-size: 2em; margin-bottom: 10px;">${icon}</div>
