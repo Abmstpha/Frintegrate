@@ -1206,3 +1206,112 @@ h1 a:hover {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* ================================================================= */
+/* RESPONSIVE DESIGN BREAKPOINTS                                     */
+/* ================================================================= */
+
+/* MOBILE DEVICES (Up to 767px) */
+@media screen and (max-width: 767px) {
+  /* Layout reset for vertical flow */
+  body {
+    padding: 10px;
+    font-size: 14px; /* Slightly smaller base size */
+  }
+
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.5em; }
+
+  /* Force single column grids */
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  /* Adjust spacing in cards */
+  .menu-card {
+    padding: 20px;
+    min-height: 120px;
+  }
+
+  .menu-card .icon {
+    font-size: 2.5em; /* Scale down icons slightly */
+  }
+
+  /* Fiche Content */
+  .fiche-content {
+    padding: 15px;
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .fiche-h2 {
+    font-size: 1.4em;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .fiche-p, .fiche-ul li {
+    font-size: 1.05em;
+    line-height: 1.6;
+  }
+
+  .objectives-card {
+    flex-direction: column;
+    padding: 15px;
+  }
+  
+  .obj-icon {
+    margin-bottom: 10px;
+  }
+
+  /* Buttons */
+  .action-btn {
+    width: 100%;
+    padding: 15px 0;
+  }
+  
+  /* Navigation Header adjustments */
+  .navigation-header {
+    margin-bottom: 15px;
+  }
+
+  .section-title {
+    font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* TABLETS (768px to 1023px) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .fiche-content {
+    padding: 30px;
+  }
+}
+
+/* DESKTOPS / LAPTOPS (1024px and up) */
+@media screen and (min-width: 1024px) {
+  /* More breathing room */
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for main menu */
+    gap: 30px;
+  }
+
+  .fiche-content {
+    padding: 50px;
+    max-width: 900px; /* Limit line length for readability */
+  }
+
+  /* Horizontal layout tweaks if needed */
+  .objectives-card {
+    padding: 30px;
+  }
+}
