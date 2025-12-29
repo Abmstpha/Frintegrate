@@ -8,7 +8,7 @@ async function loadIntegrationData(themeId) {
     try {
         const filename = `integration_${themeId.replace('-', '_')}.json`;
         const res = await fetch(`/data/${filename}`);
-        if (!res.ok) throw new Error("Failed to load content");
+        if (!res.ok) throw new Error("Failed to load content for " + themeId);
         integrationData = await res.json();
         currentThemeId = themeId;
         return integrationData;
@@ -53,6 +53,31 @@ function navigateBackIntegration() {
     }
 }
 
+// Progress Tracking
+function getProgress() {
+    return JSON.parse(localStorage.getItem('frintegrate_progress') || '{}');
+}
+
+function markAsRead(url) {
+    const progress = getProgress();
+    progress[url] = true;
+    localStorage.setItem('frintegrate_progress', JSON.stringify(progress));
+
+    // Update UI if any cards are visible matching this URL
+    document.querySelectorAll(`[data-url="${url}"]`).forEach(el => {
+        el.classList.add('completed');
+        // Add badge if missing
+        if (!el.querySelector('.status-badge')) {
+            el.insertAdjacentHTML('beforeend', '<div class="status-badge">✅ Lu</div>');
+        }
+    });
+}
+
+function isRead(url) {
+    const progress = getProgress();
+    return !!progress[url];
+}
+
 function renderNode(node) {
     const titleEl = document.getElementById('integrate-content-title');
     const bodyEl = document.getElementById('integrate-content-body');
@@ -77,7 +102,8 @@ function renderCategory(node, container) {
         node.children.forEach(child => {
             const card = document.createElement('div');
             card.className = 'menu-card';
-            card.style.minHeight = '150px'; // Slightly smaller cards for sub-items
+            card.style.minHeight = '160px'; // Slightly taller
+            card.setAttribute('data-url', child.url);
 
             // Icon based on title keywords (simple heuristic)
             let icon = '📄';
@@ -92,11 +118,20 @@ function renderCategory(node, container) {
             else if (lowerTitle.includes('culture')) icon = '🎨';
             else if (lowerTitle.includes('vote')) icon = '🗳️';
             else if (lowerTitle.includes('droit')) icon = '📜';
+            else if (lowerTitle.includes('sécurité')) icon = '👮';
+            else if (lowerTitle.includes('santé')) icon = '🏥';
+            else if (lowerTitle.includes('travail')) icon = '💼';
+
+            // Check status
+            const completedClass = isRead(child.url) ? 'completed' : '';
+            const badge = isRead(child.url) ? '<div class="status-badge">✅ Lu</div>' : '';
 
             card.innerHTML = `
-                <div style="font-size: 2em; margin-bottom: 10px;">${icon}</div>
-                <h3>${child.title}</h3>
+                <div style="font-size: 2.5em; margin-bottom: 15px;">${icon}</div>
+                <h3 style="font-size: 1.1em; line-height: 1.4;">${child.title}</h3>
+                ${badge}
             `;
+            if (completedClass) card.classList.add(completedClass);
 
             card.onclick = () => navigateToNode(child);
             grid.appendChild(card);
@@ -107,47 +142,97 @@ function renderCategory(node, container) {
 }
 
 function renderFiche(node, container) {
-    const article = document.createElement('div');
-    article.className = 'fiche-content';
-    article.style.textAlign = 'left';
-    article.style.maxWidth = '800px';
-    article.style.margin = '0 auto';
-    article.style.padding = '20px';
-    article.style.background = 'white';
-    article.style.borderRadius = '16px';
-    article.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+    const wrapper = document.createElement('div');
+    wrapper.className = 'fiche-wrapper animate-fade-in';
+
+    // Objectives Card Logic
+    let objectives = [];
+    let bodyBlocks = [];
+
+    let capturingObjectives = false;
 
     if (node.content_blocks) {
         node.content_blocks.forEach(block => {
-            const el = document.createElement(block.tag);
-            el.textContent = block.text;
-
-            // Simple styling
-            if (block.tag === 'h2') {
-                el.style.color = '#1a1a1a';
-                el.style.borderBottom = '2px solid #eee';
-                el.style.paddingBottom = '10px';
-                el.style.marginTop = '30px';
-            }
-            if (block.tag === 'h3') {
-                el.style.color = '#667eea';
-                el.style.marginTop = '20px';
-            }
-            if (block.tag === 'p') {
-                el.style.lineHeight = '1.6';
-                el.style.marginBottom = '15px';
-                el.style.color = '#333';
-            }
-            if (block.tag === 'ul') {
-                el.style.paddingLeft = '20px';
-                el.style.marginBottom = '15px';
+            const text = block.text;
+            // Identify objective headers (loose match)
+            if (text.toLowerCase().includes('objectifs de la fiche') || text.toLowerCase().includes('objectif de la fiche')) {
+                capturingObjectives = true;
+                return; // Skip the header itself
             }
 
-            article.appendChild(el);
+            // Heuristic to stop capturing objectives
+            if (capturingObjectives) {
+                if (block.tag.startsWith('h')) {
+                    capturingObjectives = false;
+                    bodyBlocks.push(block); // It's a new section
+                } else {
+                    objectives.push(block);
+                }
+            } else {
+                bodyBlocks.push(block);
+            }
         });
     }
 
-    container.appendChild(article);
+    // Render Objectives
+    if (objectives.length > 0) {
+        const objCard = document.createElement('div');
+        objCard.className = 'objectives-card';
+        objCard.innerHTML = `
+            <div class="obj-icon">🎯</div>
+            <div class="obj-content">
+                <h4 style="margin:0 0 10px 0;">Objectifs</h4>
+                <ul style="margin:0; padding-left:20px;">
+                    ${objectives.map(o => `<li>${o.text}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+        wrapper.appendChild(objCard);
+    }
+
+    // Render Body
+    const contentBody = document.createElement('div');
+    contentBody.className = 'fiche-body';
+
+    bodyBlocks.forEach(block => {
+        const el = document.createElement(block.tag);
+        el.textContent = block.text;
+
+        // Add classes for styling hooks in CSS
+        if (block.tag === 'h2') el.className = 'fiche-h2';
+        if (block.tag === 'h3') el.className = 'fiche-h3';
+        if (block.tag === 'p') el.className = 'fiche-p';
+        if (block.tag === 'ul') el.className = 'fiche-ul';
+
+        contentBody.appendChild(el);
+    });
+
+    wrapper.appendChild(contentBody);
+
+    // Completion Action
+    const actionArea = document.createElement('div');
+    actionArea.className = 'fiche-actions';
+    actionArea.style.marginTop = '40px';
+    actionArea.style.textAlign = 'center';
+    actionArea.style.paddingBottom = '40px';
+
+    const isDone = isRead(node.url);
+    const btn = document.createElement('button');
+    btn.className = `action-btn ${isDone ? 'completed' : ''}`;
+    btn.textContent = isDone ? '✅ Terminé' : 'Marquer comme lu';
+    if (isDone) btn.disabled = true;
+
+    btn.onclick = (e) => {
+        markAsRead(node.url);
+        btn.textContent = '✅ Terminé';
+        btn.classList.add('completed');
+        btn.disabled = true;
+    };
+
+    actionArea.appendChild(btn);
+    wrapper.appendChild(actionArea);
+
+    container.appendChild(wrapper);
 }
 
 // Exports

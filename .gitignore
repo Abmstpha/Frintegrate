@@ -7,3 +7,5 @@ utils
 scraper.py
 
 scraper_batch.py
+
+clean_data.py

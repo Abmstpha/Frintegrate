@@ -1071,3 +1071,138 @@ h1 a:hover {
 .hidden {
   display: none !important;
 }
+/* Content Integration Styles */
+.menu-card .status-badge {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #4CAF50;
+    font-weight: 600;
+}
+
+.menu-card.completed {
+    border: 2px solid #4CAF50;
+    background: #f8fff9;
+}
+
+.fiche-wrapper {
+    margin-bottom: 50px;
+}
+
+.objectives-card {
+    background: linear-gradient(135deg, #f0f4ff, #e1e8ff);
+    border-left: 5px solid #667eea;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.1);
+}
+
+.obj-icon {
+    font-size: 2em;
+    margin-right: 20px;
+    padding-top: 5px;
+}
+
+.obj-content h4 {
+    color: #4a5568;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+}
+
+.obj-content ul li {
+    margin-bottom: 8px;
+    color: #2d3748;
+}
+
+.fiche-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #1a1a1a;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 15px;
+    margin-top: 50px;
+    margin-bottom: 25px;
+    width: fit-content;
+}
+
+.fiche-h3 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #553c9a;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.fiche-p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.fiche-ul {
+    list-style-type: none; /* remove default bullets */
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.fiche-ul li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.fiche-ul li::before {
+    content: "•";
+    color: #667eea;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.action-btn {
+    padding: 15px 40px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: white;
+    background: #667eea;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.action-btn:hover:not(:disabled) {
+    background: #5a67d8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.action-btn.completed {
+    background: #4CAF50;
+    cursor: default;
+    box-shadow: none;
+    transform: none;
+}
+
+.action-btn:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+/* Animations */
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
