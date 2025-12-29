@@ -11,7 +11,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // Load words from local JSON file
-const WORDS_PATH = path.join(__dirname, 'public', 'words.json');
+const WORDS_PATH = path.join(__dirname, 'public', 'data', 'words.json');
 
 // API endpoint to serve a random sample of 30 words
 app.post('/api/generate-words', async (req, res) => {

@@ -18,17 +18,17 @@ function initGenderGame() {
   gameScreen = document.getElementById('gender-game-screen');
   scoreScreen = document.getElementById('gender-score-screen');
   errorScreen = document.getElementById('gender-error-screen');
-  
+
   currentWordEl = document.getElementById('current-word');
   currentTransEl = document.getElementById('current-translation');
   progressBar = document.getElementById('progress-bar');
   progressText = document.getElementById('progress-text');
   wordCard = document.getElementById('word-card');
-  
+
   finalScore = document.getElementById('final-score');
   scoreMessage = document.getElementById('score-message');
   errorMessage = document.getElementById('error-message');
-  
+
   reviewBtn = document.getElementById('review-btn');
   reviewOverlay = document.getElementById('review-overlay');
   reviewPanel = document.getElementById('review-panel');
@@ -36,13 +36,13 @@ function initGenderGame() {
 
   // Attach event listeners
   if (reviewBtn) reviewBtn.onclick = showReviewPanel;
-  
+
   // Review overlay close events
   if (reviewOverlay) {
     reviewOverlay.addEventListener('click', (e) => {
       if (e.target === reviewOverlay) closeReviewPanel();
     });
-    
+
     // Close button inside panel
     const closeBtn = reviewPanel.querySelector('.review-close-btn');
     if (closeBtn) closeBtn.onclick = closeReviewPanel;
@@ -50,17 +50,17 @@ function initGenderGame() {
 
   // Keyboard events
   document.addEventListener('keydown', handleGenderKeydown);
-  
+
   // Touch/Mouse events on word card
   if (wordCard) {
     let touchStartX = 0, mouseStartX = 0, isDown = false;
-    
+
     wordCard.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
     wordCard.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].screenX - touchStartX;
       if (Math.abs(dx) > 50) makeGenderGuess(dx > 0 ? 'masculine' : 'feminine', dx > 0 ? 'right' : 'left');
     });
-    
+
     wordCard.addEventListener('mousedown', e => { mouseStartX = e.clientX; isDown = true; });
     wordCard.addEventListener('mouseup', e => {
       if (!isDown) return;
@@ -68,7 +68,7 @@ function initGenderGame() {
       if (Math.abs(dx) > 50) makeGenderGuess(dx > 0 ? 'masculine' : 'feminine', dx > 0 ? 'right' : 'left');
       isDown = false;
     });
-    
+
     wordCard.addEventListener('mouseleave', () => isDown = false);
     wordCard.addEventListener('selectstart', e => e.preventDefault());
   }
@@ -86,7 +86,7 @@ function handleGenderKeydown(e) {
 
 async function loadWordsOnce() {
   if (cachedWords) return cachedWords;
-  const res = await fetch('/words.json');
+  const res = await fetch('/data/words.json');
   if (!res.ok) throw new Error('Unable to fetch local words.json');
   cachedWords = await res.json();
   return cachedWords;
@@ -104,21 +104,21 @@ function shuffle(arr) {
 async function startGenderGame() {
   // Re-bind elements in case they were hidden/detached? 
   // initGenderGame() should be called once on page load.
-  
+
   currentWords = []; currentWordIndex = 0; score = 0; gameActive = false;
   history = [];
-  
+
   hideAllGenderScreens();
   if (loadingScreen) loadingScreen.style.display = 'block';
-  
+
   try {
     currentWords = await loadLocalWords();
   } catch (e) {
     return showGenderError(e.message);
   }
-  
-  gameActive = true; 
-  hideAllGenderScreens(); 
+
+  gameActive = true;
+  hideAllGenderScreens();
   if (gameScreen) gameScreen.style.display = 'block';
   displayCurrentGenderWord();
 }
@@ -128,7 +128,7 @@ function displayCurrentGenderWord() {
   const w = currentWords[currentWordIndex];
   if (currentWordEl) currentWordEl.textContent = w.word;
   if (currentTransEl) currentTransEl.textContent = w.translation;
-  
+
   if (progressBar) {
     const prog = ((currentWordIndex + 1) / currentWords.length) * 100;
     progressBar.style.width = prog + '%';
@@ -186,7 +186,7 @@ function endGenderGame() {
   gameActive = false;
   hideAllGenderScreens();
   if (scoreScreen) scoreScreen.style.display = 'block';
-  
+
   if (finalScore) finalScore.textContent = `You got ${score} out of 30 correct`;
 
   let cls = '', msg = '';
@@ -232,7 +232,7 @@ function showReviewPanel() {
     `;
     reviewHistoryList.appendChild(div);
   });
-  
+
   if (reviewOverlay) {
     reviewOverlay.classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -251,10 +251,10 @@ function hideAllGenderScreens() {
   closeReviewPanel();
 }
 
-function showGenderError(msg) { 
-  hideAllGenderScreens(); 
-  if (errorMessage) errorMessage.textContent = msg; 
-  if (errorScreen) errorScreen.style.display = 'block'; 
+function showGenderError(msg) {
+  hideAllGenderScreens();
+  if (errorMessage) errorMessage.textContent = msg;
+  if (errorScreen) errorScreen.style.display = 'block';
 }
 
 // Global exposure
