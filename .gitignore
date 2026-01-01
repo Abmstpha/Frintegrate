@@ -9,3 +9,6 @@ scraper.py
 scraper_batch.py
 
 clean_data.py
+
+
+remove_non_nouns.py

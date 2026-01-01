@@ -470,11 +470,6 @@
     "translation": "soldier"
   },
   {
-    "word": "pompière",
-    "gender": "feminine",
-    "translation": "firefighter"
-  },
-  {
     "word": "juge",
     "gender": "masculine",
     "translation": "judge"
@@ -727,7 +722,7 @@
   {
     "word": "pompier",
     "gender": "masculine",
-    "translation": "firefighters"
+    "translation": "firefighter"
   },
   {
     "word": "politicien",
@@ -1342,12 +1337,12 @@
   {
     "word": "cuisine",
     "gender": "feminine",
-    "translation": "cooking"
+    "translation": "kitchen / cooking"
   },
   {
     "word": "achat",
     "gender": "masculine",
-    "translation": "buying"
+    "translation": "purchase"
   },
   {
     "word": "fabrication",
@@ -1735,19 +1730,9 @@
     "translation": "administration"
   },
   {
-    "word": "finances",
-    "gender": "feminine",
-    "translation": "finances"
-  },
-  {
     "word": "ressources",
     "gender": "feminine",
     "translation": "resources"
-  },
-  {
-    "word": "humaines",
-    "gender": "feminine",
-    "translation": "human (as in human resources)"
   },
   {
     "word": "communication",
@@ -2445,11 +2430,6 @@
     "translation": "song"
   },
   {
-    "word": "chaque",
-    "gender": "feminine",
-    "translation": "each"
-  },
-  {
     "word": "charge",
     "gender": "feminine",
     "translation": "charge"
@@ -2473,11 +2453,6 @@
     "word": "chatte",
     "gender": "feminine",
     "translation": "female cat"
-  },
-  {
-    "word": "chaud",
-    "gender": "masculine",
-    "translation": "heat"
   },
   {
     "word": "chemise",
@@ -2553,11 +2528,6 @@
     "word": "civilisation",
     "gender": "feminine",
     "translation": "civilization"
-  },
-  {
-    "word": "clair",
-    "gender": "masculine",
-    "translation": "light"
   },
   {
     "word": "classe",
@@ -2675,11 +2645,6 @@
     "translation": "consequence"
   },
   {
-    "word": "constante",
-    "gender": "feminine",
-    "translation": "constant"
-  },
-  {
     "word": "contact",
     "gender": "masculine",
     "translation": "contact"
@@ -2742,7 +2707,7 @@
   {
     "word": "court",
     "gender": "masculine",
-    "translation": "court"
+    "translation": "tennis court"
   },
   {
     "word": "coussin",
@@ -2830,11 +2795,6 @@
     "translation": "request"
   },
   {
-    "word": "demi",
-    "gender": "masculine",
-    "translation": "half"
-  },
-  {
     "word": "dent",
     "gender": "feminine",
     "translation": "tooth"
@@ -2878,11 +2838,6 @@
     "word": "discussion",
     "gender": "feminine",
     "translation": "discussion"
-  },
-  {
-    "word": "disease",
-    "gender": "feminine",
-    "translation": "maladie"
   },
   {
     "word": "distance",
@@ -2941,7 +2896,7 @@
   },
   {
     "word": "doute",
-    "gender": "feminine",
+    "gender": "masculine",
     "translation": "doubt"
   },
   {
@@ -2963,11 +2918,6 @@
     "word": "durée",
     "gender": "feminine",
     "translation": "duration"
-  },
-  {
-    "word": "dynamique",
-    "gender": "feminine",
-    "translation": "dynamic"
   },
   {
     "word": "échelle",
@@ -3245,11 +3195,6 @@
     "translation": "franchise"
   },
   {
-    "word": "français",
-    "gender": "masculine",
-    "translation": "French (language)"
-  },
-  {
     "word": "frayeur",
     "gender": "feminine",
     "translation": "fear"
@@ -3263,11 +3208,6 @@
     "word": "funérailles",
     "gender": "feminine",
     "translation": "funeral"
-  },
-  {
-    "word": "futur",
-    "gender": "masculine",
-    "translation": "future"
   },
   {
     "word": "gage",
@@ -3355,11 +3295,6 @@
     "translation": "gratitude"
   },
   {
-    "word": "gris",
-    "gender": "masculine",
-    "translation": "gray"
-  },
-  {
     "word": "grue",
     "gender": "feminine",
     "translation": "crane"
@@ -3398,11 +3333,6 @@
     "word": "hasard",
     "gender": "masculine",
     "translation": "chance"
-  },
-  {
-    "word": "haut",
-    "gender": "masculine",
-    "translation": "height"
   },
   {
     "word": "havre",
@@ -3630,11 +3560,6 @@
     "translation": "reading"
   },
   {
-    "word": "léger",
-    "gender": "masculine",
-    "translation": "light (weight)"
-  },
-  {
     "word": "lendemain",
     "gender": "masculine",
     "translation": "next day"
@@ -3800,16 +3725,6 @@
     "translation": "matrix"
   },
   {
-    "word": "mauvais",
-    "gender": "masculine",
-    "translation": "bad"
-  },
-  {
-    "word": "maxi",
-    "gender": "masculine",
-    "translation": "maximum"
-  },
-  {
     "word": "mémoire",
     "gender": "feminine",
     "translation": "memory"
@@ -3830,11 +3745,6 @@
     "translation": "mentality"
   },
   {
-    "word": "menstruation",
-    "gender": "feminine",
-    "translation": "menstruation"
-  },
-  {
     "word": "mention",
     "gender": "feminine",
     "translation": "mention"
@@ -3848,11 +3758,6 @@
     "word": "mercredi",
     "gender": "masculine",
     "translation": "Wednesday"
-  },
-  {
-    "word": "merci",
-    "gender": "masculine",
-    "translation": "thank you"
   },
   {
     "word": "merveille",
@@ -3973,11 +3878,6 @@
     "word": "mouvement",
     "gender": "masculine",
     "translation": "movement"
-  },
-  {
-    "word": "muet",
-    "gender": "masculine",
-    "translation": "mute"
   },
   {
     "word": "musée",
@@ -4275,11 +4175,6 @@
     "translation": "pessimism"
   },
   {
-    "word": "petit",
-    "gender": "masculine",
-    "translation": "small"
-  },
-  {
     "word": "pièce",
     "gender": "feminine",
     "translation": "room/coin"
@@ -4325,11 +4220,6 @@
     "translation": "feather/pen"
   },
   {
-    "word": "plupart",
-    "gender": "feminine",
-    "translation": "majority"
-  },
-  {
     "word": "poids",
     "gender": "masculine",
     "translation": "weight"
@@ -4363,11 +4253,6 @@
     "word": "pont",
     "gender": "masculine",
     "translation": "bridge"
-  },
-  {
-    "word": "populaire",
-    "gender": "masculine",
-    "translation": "popular"
   },
   {
     "word": "population",
@@ -4545,11 +4430,6 @@
     "translation": "psychology"
   },
   {
-    "word": "puis",
-    "gender": "masculine",
-    "translation": "well"
-  },
-  {
     "word": "pulsion",
     "gender": "feminine",
     "translation": "impulse"
@@ -4608,16 +4488,6 @@
     "word": "rampe",
     "gender": "feminine",
     "translation": "ramp"
-  },
-  {
-    "word": "range",
-    "gender": "feminine",
-    "translation": "range"
-  },
-  {
-    "word": "rapide",
-    "gender": "masculine",
-    "translation": "fast"
   },
   {
     "word": "rat",
@@ -4738,11 +4608,6 @@
     "word": "répartition",
     "gender": "feminine",
     "translation": "distribution"
-  },
-  {
-    "word": "repose",
-    "gender": "feminine",
-    "translation": "rest"
   },
   {
     "word": "repos",
@@ -4880,11 +4745,6 @@
     "translation": "wild boar"
   },
   {
-    "word": "sauvage",
-    "gender": "masculine",
-    "translation": "wild"
-  },
-  {
     "word": "sauvetage",
     "gender": "masculine",
     "translation": "rescue"
@@ -4998,11 +4858,6 @@
     "word": "soif",
     "gender": "feminine",
     "translation": "thirst"
-  },
-  {
-    "word": "solide",
-    "gender": "masculine",
-    "translation": "solid"
   },
   {
     "word": "solution",
@@ -5261,8 +5116,13 @@
   },
   {
     "word": "tour",
-    "gender": "masculine",
+    "gender": "feminine",
     "translation": "tower"
+  },
+  {
+    "word": "tour",
+    "gender": "masculine",
+    "translation": "turn / trip"
   },
   {
     "word": "trace",
@@ -5298,11 +5158,6 @@
     "word": "tristesse",
     "gender": "feminine",
     "translation": "sadness"
-  },
-  {
-    "word": "troisième",
-    "gender": "masculine",
-    "translation": "third"
   },
   {
     "word": "trompette",
@@ -5390,11 +5245,6 @@
     "translation": "variety"
   },
   {
-    "word": "vaste",
-    "gender": "masculine",
-    "translation": "vast"
-  },
-  {
     "word": "vautour",
     "gender": "masculine",
     "translation": "vulture"
@@ -5425,11 +5275,6 @@
     "translation": "version"
   },
   {
-    "word": "vert",
-    "gender": "masculine",
-    "translation": "green"
-  },
-  {
     "word": "vestiaire",
     "gender": "masculine",
     "translation": "cloakroom"
@@ -5438,11 +5283,6 @@
     "word": "victoire",
     "gender": "feminine",
     "translation": "victory"
-  },
-  {
-    "word": "vide",
-    "gender": "masculine",
-    "translation": "empty"
   },
   {
     "word": "vie",
@@ -5503,11 +5343,6 @@
     "word": "volume",
     "gender": "masculine",
     "translation": "volume"
-  },
-  {
-    "word": "vouloir",
-    "gender": "masculine",
-    "translation": "will"
   },
   {
     "word": "wagon",
@@ -5640,11 +5475,6 @@
     "translation": "basin"
   },
   {
-    "word": "baudrier",
-    "gender": "masculine",
-    "translation": "harness"
-  },
-  {
     "word": "bavure",
     "gender": "feminine",
     "translation": "smudge"
@@ -5663,10 +5493,5 @@
     "word": "bibelot",
     "gender": "masculine",
     "translation": "knickknack"
-  },
-  {
-    "word": "bilboquet",
-    "gender": "masculine",
-    "translation": "cup-and-ball (toy)"
   }
 ]
